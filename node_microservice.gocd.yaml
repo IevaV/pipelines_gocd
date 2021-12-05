@@ -34,7 +34,7 @@ common:
         command: bash
         arguments:
          - -c
-         - docker rm -f api_test_executor_${ENV_NAME}
+         - docker rm -f api_test_executor${ENV_NAME}
     - exec:
         run_if: failed
         command: bash
@@ -76,7 +76,7 @@ pipelines:
             ENV_NAME: dev
           jobs:
             test: 
-              artifact: 
+              artifacts: 
                 - build:
                   source: report_dev.html
                   destination: test-output
@@ -94,7 +94,7 @@ pipelines:
             ENV_NAME: int 
           jobs:
             test:
-              artifact: 
+              artifacts: 
                 - build:
                   source: report_int.html
                   destination: test-output
@@ -112,7 +112,7 @@ pipelines:
             ENV_NAME: prd
           jobs:
             test: 
-              artifact: 
+              artifacts: 
                 - build:
                   source: report_prd.html
                   destination: test-output
