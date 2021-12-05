@@ -7,6 +7,12 @@ common:
         arguments:
          - -c
          - echo "Deployment to ${ENV_NAME} environment"
+  test_tasks: &test-tasks
+    - exec:
+        command: bash
+        arguments:
+         - -c
+         - echo "Testing on ${ENV_NAME} environment"
 pipelines:
   node-microservice:
     group: microservices
@@ -31,41 +37,32 @@ pipelines:
             build: 
               tasks: *deploy-tasks
       - test-dev: 
+          environment_variables: 
+            ENV_NAME: dev
           jobs:
             build: 
-              tasks:
-               - exec: 
-                   command: bash
-                   arguments: 
-                   - -c
-                   - echo "Testing on DEV"
+              tasks: *test-tasks
       - deploy-int:
           environment_variables: 
             ENV_NAME: int       
           jobs:
             build: 
               tasks: *deploy-tasks
-      - test-int: 
+      - test-int:
+          environment_variables: 
+            ENV_NAME: int 
           jobs:
             build: 
-              tasks:
-               - exec: 
-                   command: bash
-                   arguments: 
-                   - -c
-                   - echo "Testing on INT"
+              tasks: *test-tasks
       - deploy-prd:
           environment_variables: 
             ENV_NAME: prd       
           jobs:
             build: 
               tasks: *deploy-tasks
-      - test-prd: 
+      - test-prd:
+          environment_variables: 
+            ENV_NAME: prd
           jobs:
             build: 
-              tasks:
-               - exec: 
-                   command: bash
-                   arguments: 
-                   - -c
-                   - echo "Testing on PRD"
+              tasks: *test-tasks
