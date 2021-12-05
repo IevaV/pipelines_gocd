@@ -79,7 +79,7 @@ pipelines:
             ENV_NAME: dev
           jobs:
             test: 
-              artifacts: 
+              artifact: 
                 - build:
                   source: report_dev.html
                   destination: test-output
@@ -97,7 +97,7 @@ pipelines:
             ENV_NAME: int 
           jobs:
             test:
-              artifacts: 
+              artifact: 
                 - build:
                   source: report_int.html
                   destination: test-output
@@ -115,7 +115,7 @@ pipelines:
             ENV_NAME: prd
           jobs:
             test: 
-              artifacts: 
+              artifact: 
                 - build:
                   source: report_prd.html
                   destination: test-output
